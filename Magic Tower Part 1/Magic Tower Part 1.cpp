@@ -2,45 +2,46 @@
 #include <string>
 #include <vector>
 #include <iostream>
+
 using namespace std;
 
 class player {
 
 protected:
 
-	int strength;
-	int health;
-	int defense;
-	int keyTotal;
+    int strength;
+    int health;
+    int defense;
+    int keyTotal;
 
 
-	int coloumn;
-	int row;
+    int coloumn;
+    int row;
 
 public:
-	const int startStrength = 5; //Base stats
-	const int startHealth = 5;
-	const int startDefense = 5;
-	const int startKeys = 0;
-	
-
-
-	void resetPlayer() { //Resetting player stats 
-		health = startHealth;
-		strength = startStrength;
-		defense = startDefense;
-		keyTotal = startKeys;
-	}
+    const int startStrength = 5; //Base stats
+    const int startHealth = 5;
+    const int startDefense = 5;
+    const int startKeys = 0;
 
 
 
-	player(int startRow,int startColoumn) { //Constructor
-		
-		resetPlayer();
+    void resetPlayer() { //Resetting player stats 
+        health = startHealth;
+        strength = startStrength;
+        defense = startDefense;
+        keyTotal = startKeys;
+    }
 
-		row = startRow; //Setting starting position
-		coloumn = startColoumn;
-	}
+
+
+    player(int startRow, int startColoumn) { //Constructor
+
+        resetPlayer();
+
+        row = startRow; //Setting starting position
+        coloumn = startColoumn;
+    }
 
 
     void setPosition(int newRow, int newColumn) {
@@ -48,103 +49,103 @@ public:
         coloumn = newColumn;
     }
 
-	
-
-	//The Getters so I can read the protected variables
-	int getStrength() {
-		return strength;
-	}
-
-	
-	int gainStrength(int addStrength) { //whenever potion is picked up and Strength gets boosted
-
-		strength += addStrength;
-
-		return strength;
-	}
-
-	
-
-	int getDefense() { 
-		return defense;
-	}
-	int gainDefense(int addDefense) { //whenever potion is picked up and defense gets boosted
-
-		defense += addDefense;
-
-		return defense;
-	}
-	
-
-	int getHealth() {
-		return health;
-	}
-
-	int takeDamage(int damage) { //Subtracting Health
-
-		int damageTaken; 
-	
-		damageTaken = damage - defense; //Finding out how much the attack affects the player
-
-		if (damageTaken < 0) { // Making sure damage does not give a player health
-			damageTaken = 0;
-		}
-		
-
-		health -= damageTaken; //Subtracting damage from health
-		
-		if (health < 0) { // If health falls below zero setting it to zero to make sure my is alive function works correctly
-			health = 0;
-		}
-
-		return damageTaken;
-
-			}
-
-	int gainHealth(int addHealth) { //whenever potion is picked up and health gets boosted
-
-		health += addHealth;
-
-		return health;
-	}
-
-	
-
-	int getKey() {
-		return keyTotal;
-	}
-
-	void gainKey() {
-		keyTotal++; //Adds key to inventory
-	}
-
-	bool useKey() {
-		if (keyTotal > 0) {  // Check if player has any keys
-			keyTotal--;       // Use one key
-			return true;      // Success
-		}
-		return false;         // Player had no keys
-	}
 
 
-	int getColumn() {
-		return coloumn;
-	}
+    //The Getters so I can read the protected variables
+    int getStrength() {
+        return strength;
+    }
 
-	int getRow() {
-		return row;
-	}
+
+    int gainStrength(int addStrength) { //whenever potion is picked up and Strength gets boosted
+
+        strength += addStrength;
+
+        return strength;
+    }
 
 
 
-	
+    int getDefense() {
+        return defense;
+    }
+    int gainDefense(int addDefense) { //whenever potion is picked up and defense gets boosted
 
-	
+        defense += addDefense;
 
-	bool isAlive() { //Checks if player is alive
-		
-		return (health>0);
-	}
+        return defense;
+    }
+
+
+    int getHealth() {
+        return health;
+    }
+
+    int takeDamage(int damage) { //Subtracting Health
+
+        int damageTaken;
+
+        damageTaken = damage - defense; //Finding out how much the attack affects the player
+
+        if (damageTaken < 0) { // Making sure damage does not give a player health
+            damageTaken = 0;
+        }
+
+
+        health -= damageTaken; //Subtracting damage from health
+
+        if (health < 0) { // If health falls below zero setting it to zero to make sure my is alive function works correctly
+            health = 0;
+        }
+
+        return damageTaken;
+
+    }
+
+    int gainHealth(int addHealth) { //whenever potion is picked up and health gets boosted
+
+        health += addHealth;
+
+        return health;
+    }
+
+
+
+    int getKey() {
+        return keyTotal;
+    }
+
+    void gainKey() {
+        keyTotal++; //Adds key to inventory
+    }
+
+    bool useKey() {
+        if (keyTotal > 0) {  // Check if player has any keys
+            keyTotal--;       // Use one key
+            return true;      // Success
+        }
+        return false;         // Player had no keys
+    }
+
+
+    int getColumn() {
+        return coloumn;
+    }
+
+    int getRow() {
+        return row;
+    }
+
+
+
+
+
+
+
+    bool isAlive() { //Checks if player is alive
+
+        return (health > 0);
+    }
 
 
 };
@@ -152,66 +153,68 @@ public:
 
 class enemy {
 protected:
-	
-	int strength;
-	int health;
-	int defense;
-	int row;
-	int column;
 
-public: 
+    int strength;
+    int health;
+    int defense;
+    int row;
+    int column;
 
-	enemy() {
-		
-		strength = 2;
-		health = 2;
-		defense = 2;
+public:
 
-	}
+    enemy() {
 
+        strength = 2;
+        health = 2;
+        defense = 2;
 
-	int getDefense() { //Getting Stats for battle
-		return defense;
-	}
-	int getStrength() {
-		return strength;
-	}
-	int getHealth() {
-		return health;
-	}
-
-	int getRow() { 
-		return row; }
-	
-	int getColumn() { 
-		return column; }
+    }
 
 
-	int takeDamage(int damage) { //Subtracting Health
+    int getDefense() { //Getting Stats for battle
+        return defense;
+    }
+    int getStrength() {
+        return strength;
+    }
+    int getHealth() {
+        return health;
+    }
 
-		int damageTaken;
+    int getRow() {
+        return row;
+    }
 
-		damageTaken = damage - defense; //Finding out how much the attack affects the player
-
-		if (damageTaken < 0) { // Making sure damage does not give a player health
-			damageTaken = 0;
-		}
+    int getColumn() {
+        return column;
+    }
 
 
-		health -= damageTaken; //Subtracting damage from health
+    int takeDamage(int damage) { //Subtracting Health
 
-		if (health < 0) { // If health falls below zero setting it to zero to make sure my is alive function works correctly
-			health = 0;
-		}
+        int damageTaken;
 
-		return damageTaken;
+        damageTaken = damage - defense; //Finding out how much the attack affects the player
 
-	}
+        if (damageTaken < 0) { // Making sure damage does not give a player health
+            damageTaken = 0;
+        }
 
-	bool isAlive() { //Checks if enemy is alive
 
-		return (health > 0);
-	}
+        health -= damageTaken; //Subtracting damage from health
+
+        if (health < 0) { // If health falls below zero setting it to zero to make sure my is alive function works correctly
+            health = 0;
+        }
+
+        return damageTaken;
+
+    }
+
+    bool isAlive() { //Checks if enemy is alive
+
+        return (health > 0);
+    }
 
 };
 
@@ -240,41 +243,41 @@ public:
 
     bool dungeonOver = false; //Automatically set to false once player dies or wins switches to true and goes back to main menu
 
-   
+
     static int findStartRow(const vector<vector<char>>& mapData) {// Helper function to find the starting row 
-       
+
         for (int r = 0; r < mapData.size(); r++) {  // Loop through each row
-            
+
             for (int c = 0; c < mapData[r].size(); c++) {
-                
+
                 if (mapData[r][c] == '@')
-                   
+
                     return r;// Return the row index where '@' was found
             }
         }
-        
+
     }
-	
-    static int findStartCol(const vector<vector<char>>& mapData) { 
-        
+
+    static int findStartCol(const vector<vector<char>>& mapData) {
+
         for (int r = 0; r < mapData.size(); r++) {
-            
+
             for (int c = 0; c < mapData[r].size(); c++) {
-                
+
                 if (mapData[r][c] == '@')
-                   
+
                     return c;
             }
         }
-        
+
     }
 
-	
+
     void display() {// display function to show the current state of the dungeon and player stats
 
         cout << "\n";
 
-        for (int r = 0; r < rows; r++) { 
+        for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
 
                 if (r == hero.getRow() && c == hero.getColumn())
@@ -291,40 +294,31 @@ public:
             << "  Keys: " << hero.getKey() << endl;
     }
 
-	
-    void movePlayer(char direction) {// function to move the player 
 
-        int newRow = hero.getRow();
-        int newCol = hero.getColumn();
-
-        if (direction == 'U' || direction == 'u')
-            newRow--;
-        else if (direction == 'D' || direction == 'd')
-            newRow++;
-        else if (direction == 'L' || direction == 'l')
-            newCol--;
-        else if (direction == 'R' || direction == 'r')
-            newCol++;
-        else {
-            cout << "\nInvalid Input Try Again!\n";
+    void movePlayer(string move) {// function to move the player 
+        int newRow = hero.getRow(); int newCol = hero.getColumn(); 
+       
+        for (char& c : move) c = tolower(static_cast<unsigned char>(c));//Setting everything to lowercase to make sure input is valid no matter what 
+      
+        if (move == "u" || move == "up") newRow--; 
+        else if (move == "d" || move == "down") newRow++; 
+        else if (move == "l" || move == "left") newCol--; 
+        else if (move == "r" || move == "right") newCol++; 
+        
+        else { cout << "\nInvalid Input Try Again!\n"; } 
+        if (newRow < 0 || newRow >= rows || newCol < 0 || newCol >= columns) {//Checking bounds 
            
-        }
-
-        if (newRow < 0 || newRow >= rows || newCol < 0 || newCol >= columns) {//Checking bounds
-            
-            cout << "You can't move there"<<endl;
-            return ; //Returns player to move somewhere else
-        }
-
+            cout << "You can't move there"<<endl; return ; //Returns player to move somewhere else 
+        } 
+        
         char tile = grid[newRow][newCol]; //New tile position
-
-        handleTile(tile, newRow, newCol); //Making tile changes
-
-        return ;
+        
+        tileChanger(tile, newRow, newCol); //Making tile changes 
+        return; 
     }
 
-	
-    void handleTile(char tile, int newRow, int newCol) {//function to process what happens when the player moves onto a new tile, if item or enemy is encountered replaced with +
+
+    void tileChanger(char tile, int newRow, int newCol) {//function to process what happens when the player moves onto a new tile, if item or enemy is encountered replaced with +
 
         if (tile == '#') { //Wall
             cout << "You hit a wall!\n";
@@ -358,7 +352,7 @@ public:
 
         if (tile == 'H') { //Health potion
             hero.gainHealth(5);
-            cout << "You gained 5 health!"<<endl;
+            cout << "You gained 5 health!" << endl;
             grid[newRow][newCol] = '+';
             hero.setPosition(newRow, newCol);
             return;
@@ -366,7 +360,7 @@ public:
 
         if (tile == 'S') { //Strength potion
             hero.gainStrength(5);
-            cout << "You gained 5 strength!" <<endl;
+            cout << "You gained 5 strength!" << endl;
             grid[newRow][newCol] = '+';
             hero.setPosition(newRow, newCol);
             return;
@@ -374,26 +368,26 @@ public:
 
         if (tile == 'P') { //Defense potion
             hero.gainDefense(5);
-            cout << "You gained 5 defense!"<<endl;
+            cout << "You gained 5 defense!" << endl;
             grid[newRow][newCol] = '+';
             hero.setPosition(newRow, newCol);
             return;
         }
 
         if (tile == 'E') { //Enemy Symbol
-            cout << "An enemy appears!"<<endl;
+            cout << "An enemy appears!" << endl;
             battle(newRow, newCol);
-     
+
         }
 
         if (tile == 'X') { //Goal of level
-            cout << "You beat the Game!"<<endl;
+            cout << "You beat the Game!" << endl;
             dungeonOver = true; //Once it switches to true breaks the bool condition and takes back to main menu
             return;
         }
     }
 
-	// battle function to handle battles
+    // battle function to handle battles
     void battle(int enemyRow, int enemyCol) {
 
         enemy e;
@@ -415,7 +409,7 @@ public:
         cout << "You defeated the enemy!\n";
         grid[enemyRow][enemyCol] = '+';
         hero.setPosition(enemyRow, enemyCol);
-        
+
     }
 };
 
@@ -423,7 +417,7 @@ public:
 class dungeonMaker { //Allows player to create their own dungeon
 private:
 
-	vector<vector<char>> grid; //2D Dungeon Grid
+    vector<vector<char>> grid; //2D Dungeon Grid
     int rows; //Storing rows and columns 
     int columns;
 
@@ -444,9 +438,9 @@ private:
     }
 
 public:
-   
+
     vector<vector<char>> createDungeon() {
-       
+
         while (true) {
             cout << "Welcome to the Dungeon Maker!\nPlease enter the number of rows (1-6): "; //Gettong number of rows
             cin >> rows;
@@ -460,13 +454,13 @@ public:
 
             if (rows <= 0 || rows >= 7) {   // Check if number is out of range
                 cout << "Invalid size. Please enter a number between 1 and 6.\n";
-                continue; 
+                continue;
             }
 
             break; // Valid input
         }
 
-       
+
         while (true) { //Loop with same logic just for columns
             cout << "Enter number of columns (1-6): ";
             cin >> columns;
@@ -478,15 +472,15 @@ public:
                 continue;
             }
 
-            if (columns <= 0 || columns >= 7) { 
+            if (columns <= 0 || columns >= 7) {
                 cout << "Invalid size. Please enter a number between 1 and 6.\n";
                 continue;
             }
 
-            break; 
+            break;
         }
 
-       
+
         grid.resize(rows); //Resizing grid
         for (int i = 0; i < rows; i++) {
             grid[i].resize(columns);
@@ -498,13 +492,13 @@ public:
         int choice = 0;
 
         while (choice != 2) { //Will keep looping until 2 is selected
-            
+
             displayGrid(); //Displaying grid
 
-            cout << "\n1) Add Object"<<endl;
-            cout << "\n2) Save Dungeon"<<endl;
+            cout << "\n1) Add Object" << endl;
+            cout << "\n2) Save Dungeon" << endl;
 
-            
+
             while (true) {// Validating menu choice
                 cout << "Choose option: ";
                 cin >> choice;
@@ -530,18 +524,18 @@ public:
             else if (choice == 2) {
                 int endCount = 0;
                 int startCount = 0;// Check there is exactly one starting point @
-                
+
                 for (int r = 0; r < rows; r++) //goes through rows and colummns to find @
-                   
-               for (int c = 0; c < columns; c++)
-                        
+
+                    for (int c = 0; c < columns; c++)
+
                         if (grid[r][c] == '@') {
                             startCount++;
                         }
-                           
-                         
+
+
                 if (startCount != 1) {
-                    cout << "Dungeon must have exactly one starting point @ You have " << startCount << "\n"<<endl;
+                    cout << "Dungeon must have exactly one starting point @ You have " << startCount << "\n" << endl;
                     choice = 0; // Reset choice to 0 and not 2 so loop does not break
                     continue; //This makes dungedon creator keep looping
                 }
@@ -569,7 +563,7 @@ public:
 
         int objChoice;
         cout << "Select object: ";
-       
+
         while (!(cin >> objChoice) || objChoice < 0 || objChoice > 9) { //Validator to make sure no letter or out of range number gets put in
             cout << "Invalid selection. \nEnter a number between 1 and 9: ";
             cin.clear();
@@ -577,11 +571,11 @@ public:
         }
 
         char symbol = '+'; //Establishing the char input
-       
+
         if (objChoice == 0) {//If statements for each option selected
             symbol = '+';
         }
-        else if (objChoice == 1) { 
+        else if (objChoice == 1) {
             symbol = '#';
         }
         else if (objChoice == 2) {
@@ -608,14 +602,14 @@ public:
         else if (objChoice == 9) {
             symbol = 'P';
         }
-        
-        
+
+
 
         int r, c;
-        cout << "Enter row: ";
+        cout << "Enter row (Y-Coord): ";
         cin >> r; //auto breaks out if letter is selected
 
-        cout << "Enter column: ";
+        cout << "Enter column (X-Coord): ";
         cin >> c;
 
         if (r < 0 || r >= rows || c < 0 || c >= columns) { //Validating object location
@@ -634,7 +628,7 @@ int main()
     vector<string> dungeonNames;//Different names of all my dungeons
 
     //PreMade Dungeons
-    
+
     vector<vector<char>> dungeon1 = {
        {'@', '+', 'K', 'D', 'X'},
     };
@@ -654,14 +648,14 @@ int main()
     dungeonNames.push_back("Dungeon 1");
 
 
-    
+
 
     while (true) { //Loop runs until user chooses an option or 3
 
-        cout << "Welcome to Magic Tower Portfolio Part 1"<<endl;
-        cout << "1) Enter a dungeon"<<endl;
-        cout << "2) Design a dungeon"<<endl;
-        cout << "3) Exit"<<endl;
+        cout << "\n\nWelcome to Magic Tower Portfolio Part 1" << endl;
+        cout << "1) Enter a dungeon" << endl;
+        cout << "2) Design a dungeon" << endl;
+        cout << "3) Exit" << endl;
 
         int choice;
         while (!(cin >> choice) || choice < 1 || choice > 3) { //Validator to make sure no letter or out of range number or char gets put in
@@ -672,45 +666,78 @@ int main()
 
 
         if (choice == 1) { //Player chose to play a dungeon
-           
-            cout << "Available Dungeons (Select Correspoding Number) : "<<endl;
+
+            cout << "Available Dungeons (Enter Number or Name): " << endl;
 
             for (int i = 0; i < dungeonNames.size(); i++) { //Displaying all Dungeons and their names
                 cout << i + 1 << ") " << dungeonNames[i] << endl;
             }
 
-            int selection; 
-            cin >> selection; //Player selecting dungeon they want to play
+			cin.ignore(); // Clear the newline character 
 
-            if (selection >= 1 && selection <= dungeonSelection.size()) { //making sure selection is valid, if not bring back out to main menu
+            string selection;
+            getline(cin,selection); //Player selecting dungeon they want to play
 
-                Dungeon d(dungeonSelection[selection-1]); //0 Indexed
-
-                while (!d.dungeonOver) { //While dungeon over is not over
-                    d.display(); //Display current state of dungeon
-
-                    char input; // Ask the player which direction to move.
-                    
-                    cout << "Move: \nU for up\nD for Down\nL for Left\nR for Right ";
-                    cin >> input;
-
-                    d.movePlayer(input); // Processing move updating player position
+			bool isNumber = true; //Assuming input is a number until proven otherwise by checking each character
+            for(char c :selection) { //Checking if selection is a number or name
+				if (!isdigit(c)) { //if a character is not a digit then it is not a number and must be a name
+                    isNumber = false;
+                    break;
                 }
+			}
+
+			int index = -1;// Will store the dungeon position, if it stays at -1 no dungeon found
+
+
+            if (isNumber) {
+				int num = stoi(selection); //Converting string to int if number was selected
+                if (num >= 1 && num <= dungeonSelection.size()) {
+                    index = num - 1; // Adjusting for 0-based index
+                }
+            } 
+
+            if (index == -1) { //If not number then checking if name was selected
+                for (int i = 0; i < dungeonNames.size(); i++) { // Loop through names
+                    if (dungeonNames[i] == selection) {// Compare typed name to stored name
+                        index = i;// Store matching index
+                        break;// Stop once found
+                    }
+                }
+			}
+
+            if (index == -1) { //if no matches then returns to main menu
+                cout << "Invalid selection. Returning to main menu.\n";
+                continue;
             }
+
+			Dungeon d(dungeonSelection[index]); //Creating dungeon object with selected dungeon
+
+            while (!d.dungeonOver) {
+                d.display(); 
+
+                string move;
+				cout << "Move: \nU or Up \n D or Down \nL or Left \nR or Right\nEnter move: ";
+                cin >> move;
+
+                d.movePlayer(move);
+            }
+
+
+
         }
 
         else if (choice == 2) { //Choice to make a dungeon
-          
+
             dungeonMaker maker;// Create a dungeonMaker object to handle dungeon creation.
 
-            vector<vector<char>> newDungeon = maker.createDungeon();  
+            vector<vector<char>> newDungeon = maker.createDungeon();
 
             string name;
             cout << "Enter name for dungeon: ";
             cin >> name; //Player naming dungeon
 
             dungeonSelection.push_back(newDungeon);//Using Pushback to make space in array for new dungeon name and the actual dungeon itself
-            dungeonNames.push_back(name); 
+            dungeonNames.push_back(name);
         }
 
 
